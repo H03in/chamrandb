@@ -31,29 +31,37 @@
             <div class="row">
                 <div class="col-lg-2 left-link">
                     <div>
-                         <img class="link" src="{% static 'image5.png' %}" width="20px">
-                    <h4><a href="/admin/">Sign in</a></h4>
+                        <a href="/admin/">
+                            <img class="link" src="{% static 'image5.png' %}" width="20px">
+                        </a>
+                        <h4><a href="/admin/">Sign in</a></h4>
                     </div>
 
                 </div>
                 <div class="col-lg-2 left-link">
                     <div>
-                         <img class="link" src="{% static 'image4.png' %}" width="20px">
-                    <h4><a href="/admin/bio/gene/">Submit data</a></h4>
+                        <a href="/admin/bio/gene/">
+                            <img class="link" src="{% static 'image4.png' %}" width="20px">
+                        </a>
+                        <h4><a href="/admin/bio/gene/">Submit data</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-2 right-link">
                     <div>
-                         <img class="link" src="{% static 'image3.png' %}" width="20px">
-                    <h4><a href="{% url 'about' %}">About us</a></h4>
+                        <a href="{% url 'about' %}">
+                            <img class="link" src="{% static 'image3.png' %}" width="20px">
+                        </a>
+                        <h4><a href="{% url 'about' %}">About us</a></h4>
                     </div>
 
                 </div>
                 <div class="col-lg-2 right-link">
-                    <div >
-                        <img class="link" src="{% static 'image2.png' %}" width="20px">
+                    <div>
+                        <a href="{% url 'contact' %}">
+                            <img class="link" src="{% static 'image2.png' %}" width="20px">
+                        </a>
                         <h4><a href="{% url 'contact' %}">Contact</a></h4>
                     </div>
 
