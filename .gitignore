@@ -3,3 +3,4 @@
 db.sqlite3
 out.json
 **/*.pyc
+bioengin/local_settings.py
