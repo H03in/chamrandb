@@ -1,0 +1,64 @@
+{% extends 'bio/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container home-box">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+                <div class="row google-logo text-center">
+                    <p>Welcome to ChamranDB. This is a genomic database for Triticum aestivum, chamran sub.</p>
+                </div>
+                <div class="row google-logo text-center">
+                    <img src="{% static 'image1.png' %}" alt="logo" id="logo">
+                    <h1>Chamran DB</h1>
+                </div>
+                <div class="row google-form text-center">
+                    <form action="{% url 'search' %}" method="get">
+                        <div class="form-group">
+
+                            <input type="text" class="form-control google-search round" name="q" placeholder="Gene ID">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-default round">Search</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 left-link">
+                    <div>
+                         <img class="link" src="{% static 'image5.png' %}" width="20px">
+                    <h4><a href="/admin/">Sign in</a></h4>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 left-link">
+                    <div>
+                         <img class="link" src="{% static 'image4.png' %}" width="20px">
+                    <h4><a href="/admin/bio/gene/">Submit data</a></h4>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2 right-link">
+                    <div>
+                         <img class="link" src="{% static 'image3.png' %}" width="20px">
+                    <h4><a href="{% url 'about' %}">About us</a></h4>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 right-link">
+                    <div >
+                        <img class="link" src="{% static 'image2.png' %}" width="20px">
+                        <h4><a href="{% url 'contact' %}">Contact</a></h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

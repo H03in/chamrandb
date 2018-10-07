@@ -1,0 +1,22 @@
+
+<body>
+    <img src="{% static 'logo.png' %}">
+<form class="form-wrapper">
+    <input type="text" id="search" name="q" placeholder="Search for..." required>
+    <input type="submit" value="search" id="submit">
+</form>
+{% if results %}
+    {% for result in results %}
+        <div>
+        <h3>{{ result.name }}</h3>
+        <p>{{ result.code }}</p>
+        </div>
+    {% endfor %}
+
+    <div class="pagination">
+
+</div>
+{% endif %}
+
+</body>
+</html>

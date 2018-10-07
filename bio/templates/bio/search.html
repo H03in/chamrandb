@@ -1,0 +1,148 @@
+{% extends 'bio/base.html' %}
+{% block content %}
+
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+
+                        <h2>
+                            Showing {{ results.start_index }} to {{ results.end_index }}
+                            of {{ results.paginator.count }}
+                            results found for: <span class="text-navy">"{{ q }}"</span>
+                        </h2>
+
+                        <div class="search-form">
+                            <form action="" method="get">
+                                <div class="input-group">
+                                    <input type="text" placeholder="type here" name="q" class="form-control input-lg" value="{{ q }}">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-lg btn-primary" type="submit">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        {% if results %}
+                            {% for result in results %}
+
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="search-result">
+                                    <h3><a href="#" data-toggle="modal"
+                                           data-target="#{{ result.id }}">[ {{ result.code }} ]&nbsp;{{ result.name }}</a></h3>
+                                    <div style="margin-top: 5px">
+                                        <span>Sequence: &nbsp;</span><a href="#" class="search-link">{{ result.sequence }}</a>
+                                    <p>
+                                        <span>Source: &nbsp;</span>{{ result.source }}
+                                    </p>
+                                    </div>
+
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="{{ result.id }}" tabindex="-1" role="dialog"
+                                     aria-labelledby="{{ result.name }}" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="{{ result.id }}">{{ result.name }} &nbsp; [{{ result.code }}]</h5>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><a href="#" class="search-link">{{ result.sequence }}</a></p>
+                                                <p>{{ result.source }}</p>
+
+                                                 <div class="hr-line-dashed"></div>
+                                                {{ result.detail }}
+                                                {% if result.detail %}
+                                                <div class="hr-line-dashed"></div>
+                                                {% endif %}
+                                                <p>
+                                                    <b>Keywords:&nbsp;</b>
+                                                    {% for keyword in result.keywords.all %}
+                                                        {{ keyword.name }}
+                                                        {% if not forloop.last %},&nbsp;{% endif %}
+                                                    {% endfor %}
+                                                </p>
+                                                <p>
+                                                    <b>Related sources: &nbsp;</b>
+                                                    <ul>
+                                                    {% for source in result.related_sources.all %}
+                                                        <li>
+                                                        <a href="{{ source.url }}" target="_blank">{{ source.name }}</a>
+                                                        </li>
+
+                                                    {% endfor %}
+                                                    </ul>
+
+                                                </p>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            {% endfor %}
+
+
+                            <div class="">
+                                <ul class="pagination" style="display: block;">
+
+                                    {% if results.has_previous %}
+                                        <li><a href="?q={{ q }}&page={{ results.previous_page_number }}"><i
+                                                class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+                                    {% else %}
+                                        <li class="disabled"><span><i class="fa fa-chevron-left"
+                                                                      aria-hidden="true"></i></span></li>
+                                    {% endif %}
+
+                                    {% if results.number|add:'-4' > 1 %}
+                                        <li><a href="?q={{ q }}&page={{ results.number|add:'-5' }}">&hellip;</a></li>
+                                    {% endif %}
+
+                                    {% for i in results.paginator.page_range %}
+                                        {% if results.number == i %}
+                                            <li class="active"><span>{{ i }} <span
+                                                    class="sr-only">(current)</span></span>
+                                            </li>
+                                        {% elif i > results.number|add:'-5' and i < results.number|add:'5' %}
+                                            <li><a href="?q={{ q }}&page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if results.paginator.num_pages > page_obj.number|add:'4' %}
+                                        <li><a href="?q={{ q }}&page={{ results.number|add:'5' }}">&hellip;</a></li>
+                                    {% endif %}
+
+                                    {% if results.has_next %}
+                                        <li><a href="?q={{ q }}&page={{ results.next_page_number }}"><i
+                                                class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+                                    {% else %}
+                                        <li class="disabled"><span><i class="fa fa-chevron-right"
+                                                                      aria-hidden="true"></i></span></li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+
+
+
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
